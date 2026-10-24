@@ -35,19 +35,12 @@ modules:
       packages:
         # terminais e shell
         - kitty
-        - fish
         # utilitários de terminal
-        - btop
-        - fastfetch
         - mpv
         # GNOME
         - gnome-tweaks
-        # sistema
-        - ddcutil
         # cockpit
         - cockpit
-        - cockpit-podman
-        - cockpit-storaged
         - cockpit-machines
 
   # ---------- Flatpaks ----------
