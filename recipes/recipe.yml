@@ -1,45 +1,97 @@
----
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-# image will be published to ghcr.io/<user>/<name>
-name: muOS
-# description will be included in the image's metadata
-description: This is my personal OS image.
+name: arisu
+description: Minha instalação gamer (umbriel + noctalia + GNOME), migrada do CachyOS
 
-# the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: latest # You can pin to a specific version of Fedora as well
+base-image: ghcr.io/ublue-os/bazzite-gnome   # AMD/Intel + GNOME (mantém GDM e GNOME ao lado)
+image-version: latest
 
-# module configuration, executed in order
-# you can include multiple instances of the same module
 modules:
-  - type: files
-    files:
-      - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
-
+  # ---------- Brave Origin (estável) ----------
   - type: dnf
     repos:
-      copr:
-        - atim/starship
+      cleanup: true
+      files:
+        - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
     install:
       packages:
-        - micro
-        - starship
-    remove:
-      packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
-        - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+        - brave-origin
 
+  # ---------- Umbriel + Noctalia ----------
+  - type: dnf
+    repos:
+      cleanup: true
+      files:
+        # Terra: fonte do umbriel no Fedora
+        - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
+    install:
+      packages:
+        - umbriel-nightly
+        - noctalia          
+        - wlr-randr
+
+  # ---------- Pacotes do sistema (RPM) ----------
+  - type: dnf
+    install:
+      packages:
+        # terminais e shell
+        - kitty
+        - fish
+        # utilitários de terminal
+        - btop
+        - fastfetch
+        - mpv
+        # GNOME
+        - gnome-tweaks
+        # sistema
+        - ddcutil
+        # cockpit
+        - cockpit
+        - cockpit-podman
+        - cockpit-storaged
+        - cockpit-machines
+
+  # ---------- Flatpaks ----------
   - type: default-flatpaks
     configurations:
-      - notify: true # Send notification after install/uninstall is finished (true/false)
+      - notify: true
         scope: system
-        # If no repo information is specified, Flathub will be used by default
-        install: # system flatpaks we want all users to have and not remove
+        install:
+          # jogos
+          - com.vysp3r.ProtonPlus
+          - com.github.Matoking.protontricks
+          - com.github.mtkennerly.ludusavi
+          - io.github.radiolamp.mangojuice
+          - io.github.antimicrox.antimicrox
+          # comunicação
+          - com.discordapp.Discord
+          - org.telegram.desktop
+          - com.ktechpit.whatsie
+          - me.proton.Mail
+          # mídia
+          - com.spotify.Client
+          - org.musicbrainz.Picard
+          - org.nicotine_plus.Nicotine
+          - com.github.johnfactotum.Foliate
+          - com.yacreader.YACReader
+          # navegadores e produtividade
           - org.mozilla.firefox
-          - org.gnome.Loupe
-      - scope: user # Also add Flathub user repo, but no user packages
-
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+          - org.zotero.Zotero
+          - net.ankiweb.Anki
+          - org.qbittorrent.qBittorrent
+          - io.unobserved.furtherance
+          # gerenciamento do sistema
+          - com.github.tchx84.Flatseal
+          - io.github.flattool.Warehouse
+          - io.github.flattool.Ignition
+          - io.github.kolunmi.Bazaar
+          - it.mijorus.gearlever
+          - ca.desrt.dconf-editor
+          - com.mattjakeman.ExtensionManager
+          - com.github.marhkb.Pods
+          - io.github.vikdevelop.SaveDesktop
+          - com.sidevesh.Luminance
+          - page.tesk.Refine
+          - io.github.alamahant.Asteria
+          - io.github.arijanj.Mimic
+          - land.arcana.TarotCanvas
+          - org.pvermeer.WebAppHub
