@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-name: arisu
+name: muos
 description: Minha instalação gamer (Hyprland + Noctalia + GNOME), migrada do CachyOS
 
 base-image: ghcr.io/ublue-os/bazzite-gnome   # AMD/Intel + GNOME (mantém GDM e GNOME ao lado)
