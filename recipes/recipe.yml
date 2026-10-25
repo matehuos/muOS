@@ -20,6 +20,7 @@ modules:
       packages:
         - brave-origin
         - hyprland
+        - hyprland-guiutils
         - xdg-desktop-portal-hyprland
         - noctalia
         - kitty
@@ -33,4 +34,5 @@ modules:
         - awww
         - wlr-randr
         - nwg-look
+        - loupe
 
