@@ -16,32 +16,27 @@ modules:
       packages:
         - brave-origin
 
-  # ---------- Umbriel + Noctalia ----------
+  # ---------- Umbriel (Terra) ----------
   - type: dnf
     repos:
       cleanup: true
       files:
-        # Terra: fonte do umbriel no Fedora
         - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
     install:
       packages:
         - umbriel-nightly
-        - noctalia          
-        - wlr-randr
 
   # ---------- Pacotes do sistema (RPM) ----------
   - type: dnf
     install:
       packages:
-        # terminais e shell
+        - repo: updates          # garante o noctalia 5.3.0 do Fedora
+          packages:
+            - noctalia
         - kitty
-        # utilitários de terminal
         - mpv
-        # GNOME
         - gnome-tweaks
-        # cockpit
         - cockpit
-        - cockpit-machines
 
   # ---------- Flatpaks ----------
   - type: default-flatpaks
