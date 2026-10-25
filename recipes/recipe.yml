@@ -6,7 +6,6 @@ base-image: ghcr.io/ublue-os/bazzite-gnome   # AMD/Intel + GNOME (mantém GDM e 
 image-version: latest
 
 modules:
-  # ---------- Pacotes RPM Unificados (Brave + COPR Hyprland/Noctalia + Sistema) ----------
   - type: dnf
     repos:
       cleanup: true
@@ -14,9 +13,11 @@ modules:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
       copr:
         - lionheartp/Hyprland
+        - paolino/hyprmoncfg
+        - monkeygold/nautilus-open-any-terminal
+        - faugus/faugus-launcher
     install:
       packages:
-        # Navegador
         - brave-origin
         - hyprland
         - xdg-desktop-portal-hyprland
@@ -25,4 +26,11 @@ modules:
         - mpv
         - gnome-tweaks
         - cockpit
+        - nautilus-open-any-terminal
+        - hyprmoncfg
+        - faugus-launcher
+        - android-tools
+        - awww
+        - wlr-randr
+        - nwg-look
 
