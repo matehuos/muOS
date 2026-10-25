@@ -16,23 +16,22 @@ modules:
       packages:
         - brave-origin
 
-  # ---------- Umbriel (Terra) ----------
+  # ---------- Noctalia (COPR) ----------
   - type: dnf
     repos:
       cleanup: true
-      files:
-        - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
+      copr:
+        - lionheartp/Hyprland
     install:
       packages:
-        - umbriel-nightly
+        - repo: copr:copr.fedorainfracloud.org:lionheartp:Hyprland
+          packages:
+            - noctalia-git
 
   # ---------- Pacotes do sistema (RPM) ----------
   - type: dnf
     install:
       packages:
-        - repo: updates          # garante o noctalia 5.3.0 do Fedora
-          packages:
-            - noctalia
         - kitty
         - mpv
         - gnome-tweaks
