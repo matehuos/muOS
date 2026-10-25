@@ -35,4 +35,5 @@ modules:
         - wlr-randr
         - nwg-look
         - loupe
+        - gnome-text-editor
 
