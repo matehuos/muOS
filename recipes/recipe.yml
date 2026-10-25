@@ -1,84 +1,28 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 name: arisu
-description: Minha instalação gamer (umbriel + noctalia + GNOME), migrada do CachyOS
+description: Minha instalação gamer (Hyprland + Noctalia + GNOME), migrada do CachyOS
 
 base-image: ghcr.io/ublue-os/bazzite-gnome   # AMD/Intel + GNOME (mantém GDM e GNOME ao lado)
 image-version: latest
 
 modules:
-  # ---------- Brave Origin (estável) ----------
+  # ---------- Pacotes RPM Unificados (Brave + COPR Hyprland/Noctalia + Sistema) ----------
   - type: dnf
     repos:
       cleanup: true
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+      copr:
+        - lionheartp/Hyprland
     install:
       packages:
+        # Navegador
         - brave-origin
-
-  # ---------- Umbriel (Terra Repo isolado) ----------
-  - type: dnf
-    repos:
-      cleanup: true
-      files:
-        - https://terra.fyralabs.com/terra.repo
-    install:
-      packages:
-        - umbriel-nightly
-        - xdg-desktop-portal-umbriel-nightly
-
-  # ---------- Pacotes do sistema (RPM Oficiais do Fedora) ----------
-  - type: dnf
-    install:
-      packages:
+        - hyprland
+        - xdg-desktop-portal-hyprland
         - noctalia
         - kitty
         - mpv
         - gnome-tweaks
         - cockpit
 
-  # ---------- Flatpaks ----------
-  - type: default-flatpaks
-    configurations:
-      - notify: true
-        scope: system
-        install:
-          # jogos
-          - com.vysp3r.ProtonPlus
-          - com.github.Matoking.protontricks
-          - com.github.mtkennerly.ludusavi
-          - io.github.radiolamp.mangojuice
-          - io.github.antimicrox.antimicrox
-          # comunicação
-          - com.discordapp.Discord
-          - org.telegram.desktop
-          - com.ktechpit.whatsie
-          - me.proton.Mail
-          # mídia
-          - com.spotify.Client
-          - org.musicbrainz.Picard
-          - org.nicotine_plus.Nicotine
-          - com.github.johnfactotum.Foliate
-          - com.yacreader.YACReader
-          # navegadores e produtividade
-          - org.mozilla.firefox
-          - org.zotero.Zotero
-          - net.ankiweb.Anki
-          - org.qbittorrent.qBittorrent
-          - io.unobserved.furtherance
-          # gerenciamento do sistema
-          - com.github.tchx84.Flatseal
-          - io.github.flattool.Warehouse
-          - io.github.flattool.Ignition
-          - io.github.kolunmi.Bazaar
-          - it.mijorus.gearlever
-          - ca.desrt.dconf-editor
-          - com.mattjakeman.ExtensionManager
-          - com.github.marhkb.Pods
-          - io.github.vikdevelop.SaveDesktop
-          - com.sidevesh.Luminance
-          - page.tesk.Refine
-          - io.github.alamahant.Asteria
-          - io.github.arijanj.Mimic
-          - land.arcana.TarotCanvas
-          - org.pvermeer.WebAppHub
