@@ -38,5 +38,6 @@ modules:
         - loupe
         - gnome-text-editor
         - umbriel-git
+        - python3-tkinter
         - xdg-desktop-portal-umbriel-git
 
