@@ -40,4 +40,5 @@ modules:
         - umbriel-git
         - python3-tkinter
         - xdg-desktop-portal-umbriel-git
+        - firefox
 
