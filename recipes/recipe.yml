@@ -16,6 +16,7 @@ modules:
         - paolino/hyprmoncfg
         - monkeygold/nautilus-open-any-terminal
         - faugus/faugus-launcher
+        - c0mpile/builds
     install:
       packages:
         - brave-origin
@@ -36,4 +37,6 @@ modules:
         - nwg-look
         - loupe
         - gnome-text-editor
+        - umbriel-git
+        - xdg-desktop-portal-umbriel-git
 
