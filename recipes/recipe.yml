@@ -38,7 +38,13 @@ modules:
         - gnome-text-editor
         - python3-tkinter
         - firefox
-        # umbriel-git e xdg-desktop-portal-umbriel-git saíram daqui
+    remove:
+      packages:
+        - rom-properties-utils
+        - rom-properties-gtk4
+        - rom-properties-localsearch3
+        - rom-properties
+        - rom-properties-common
 
   # Terra: ativo só neste passo, só para o umbriel
   - type: dnf
