@@ -11,24 +11,16 @@ modules:
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
       copr:
-        - lionheartp/Hyprland
-        - paolino/hyprmoncfg
         - monkeygold/nautilus-open-any-terminal
         - faugus/faugus-launcher
-        # - c0mpile/builds   # remova se só usava para o umbriel-git
     install:
       packages:
         - brave-origin
-        - hyprland
-        - hyprland-guiutils
-        - xdg-desktop-portal-hyprland
         - noctalia
         - kitty
         - mpv
-        - gnome-tweaks
         - cockpit
         - nautilus-open-any-terminal
-        - hyprmoncfg
         - faugus-launcher
         - android-tools
         - awww
