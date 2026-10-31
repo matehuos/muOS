@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 name: muos
-description: Minha instalação gamer (Hyprland + Noctalia + GNOME), migrada do CachyOS
+description: Muuuuuuuuuuuu
 
-base-image: ghcr.io/ublue-os/bazzite-gnome   # AMD/Intel + GNOME (mantém GDM e GNOME ao lado)
+base-image: ghcr.io/ublue-os/bazzite-gnome   
 image-version: latest
 modules:
   - type: dnf
@@ -15,7 +15,6 @@ modules:
         - paolino/hyprmoncfg
         - monkeygold/nautilus-open-any-terminal
         - faugus/faugus-launcher
-        # - c0mpile/builds   # remova se só usava para o umbriel-git
     install:
       packages:
         - brave-origin
@@ -46,7 +45,7 @@ modules:
         - rom-properties
         - rom-properties-common
 
-  # Terra: ativo só neste passo, só para o umbriel
+  # Terra: ativo só para o umbriel
   - type: dnf
     repos:
       cleanup: true
