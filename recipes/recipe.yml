@@ -55,16 +55,16 @@ modules:
       packages:
         - umbriel-nightly
 
-  - type: script
-    snippets:
-      - |
-        set -euo pipefail
-        ANKI_VERSION=26.09.3
-        cd /tmp
-        curl -fsSL -o anki.tar.zst "https://github.com/ankitects/anki/releases/download/${ANKI_VERSION}/anki-${ANKI_VERSION}-linux-x86_64.tar.zst"
-        mkdir anki-src
-        tar --zstd -xf anki.tar.zst -C anki-src --strip-components=1
-        cd anki-src
-        PREFIX=/usr ./install.sh
-        cd /
-        rm -rf /tmp/anki-src /tmp/anki.tar.zst
+  #- type: script
+    #snippets:
+      #- |
+        #set -euo pipefail
+        #ANKI_VERSION=26.09.3
+        #cd /tmp
+        #curl -fsSL -o anki.tar.zst "https://github.com/ankitects/anki/releases/download/${ANKI_VERSION}/anki-${ANKI_VERSION}-linux-x86_64.tar.zst"
+        #mkdir anki-src
+        #tar --zstd -xf anki.tar.zst -C anki-src --strip-components=1
+        #cd anki-src
+        #PREFIX=/usr ./install.sh
+        #cd /
+        #rm -rf /tmp/anki-src /tmp/anki.tar.zst
