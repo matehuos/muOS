@@ -37,6 +37,7 @@ modules:
         - gnome-text-editor
         - python3-tkinter
         - firefox
+        - umbriel-nightly
     remove:
       packages:
         - rom-properties-utils
@@ -44,16 +45,6 @@ modules:
         - rom-properties-localsearch3
         - rom-properties
         - rom-properties-common
-
-  # Terra: ativo só para o umbriel
-  - type: dnf
-    repos:
-      cleanup: true
-      files:
-        - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
-    install:
-      packages:
-        - umbriel-nightly
 
   #- type: script
     #snippets:
