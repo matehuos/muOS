@@ -5,14 +5,16 @@ description: Muuuuuuuuuuuu
 base-image: ghcr.io/ublue-os/bazzite-gnome   
 image-version: latest
 modules:
+  - type: script
+    snippets:
+      - sed -i 's/enabled=0/enabled=1/g' /usr/share/dnf5/repos.d/terra.repo
   - type: dnf
     repos:
       cleanup: true
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
       copr:
-        #- lionheartp/Hyprland
-        - paolino/hyprmoncfg
+        - lionheartp/Hyprland  # Mantido para não quebrar dependências do hyprmoncfg
         - monkeygold/nautilus-open-any-terminal
         - faugus/faugus-launcher
     install:
@@ -24,7 +26,6 @@ modules:
         - gnome-tweaks
         - cockpit
         - nautilus-open-any-terminal
-        - hyprmoncfg
         - faugus-launcher
         - android-tools
         - awww
