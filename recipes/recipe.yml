@@ -2,19 +2,9 @@
 name: muos
 description: Muuuuuuuuuuuu
 
-base-image: ghcr.io/ublue-os/bazzite-gnome
+base-image: ghcr.io/ublue-os/bazzite-gnome   
 image-version: latest
 modules:
-  - type: script
-    snippets:
-      - |
-        set -euo pipefail
-        f=/usr/share/dnf5/repos.d/terra.repo
-        cp -a "$f" "$f.bb-orig"
-        sed -i -E 's/^enabled[[:space:]]*=[[:space:]]*(0|false)[[:space:]]*$/enabled=1/' "$f"
-        echo "--- terra.repo depois do sed ---"
-        grep -n -E '^\[|^enabled' "$f"
-
   - type: dnf
     repos:
       cleanup: true
@@ -22,26 +12,31 @@ modules:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
       copr:
         - lionheartp/Hyprland
+        - paolino/hyprmoncfg
         - monkeygold/nautilus-open-any-terminal
         - faugus/faugus-launcher
     install:
       packages:
         - brave-origin
+        - hyprland
+        - hyprland-guiutils
+        - xdg-desktop-portal-hyprland
         - noctalia
         - kitty
         - mpv
         - gnome-tweaks
         - cockpit
         - nautilus-open-any-terminal
+        - hyprmoncfg
         - faugus-launcher
         - android-tools
         - awww
+        - wlr-randr
         - nwg-look
         - loupe
         - gnome-text-editor
         - python3-tkinter
         - firefox
-        - umbriel-nightly
     remove:
       packages:
         - rom-properties-utils
@@ -50,6 +45,26 @@ modules:
         - rom-properties
         - rom-properties-common
 
-  - type: script
-    snippets:
-      - mv /usr/share/dnf5/repos.d/terra.repo.bb-orig /usr/share/dnf5/repos.d/terra.repo
+  # Terra: ativo só para o umbriel
+  - type: dnf
+    repos:
+      cleanup: true
+      files:
+        - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
+    install:
+      packages:
+        - umbriel-nightly
+
+  #- type: script
+    #snippets:
+      #- |
+        #set -euo pipefail
+        #ANKI_VERSION=26.09.3
+        #cd /tmp
+        #curl -fsSL -o anki.tar.zst "https://github.com/ankitects/anki/releases/download/${ANKI_VERSION}/anki-${ANKI_VERSION}-linux-x86_64.tar.zst"
+        #mkdir anki-src
+        #tar --zstd -xf anki.tar.zst -C anki-src --strip-components=1
+        #cd anki-src
+        #PREFIX=/usr ./install.sh
+        #cd /
+        #rm -rf /tmp/anki-src /tmp/anki.tar.zst
