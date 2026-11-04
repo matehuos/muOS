@@ -11,16 +11,13 @@ modules:
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
       copr:
-        - lionheartp/Hyprland
+        #- lionheartp/Hyprland
         - paolino/hyprmoncfg
         - monkeygold/nautilus-open-any-terminal
         - faugus/faugus-launcher
     install:
       packages:
         - brave-origin
-        #- hyprland
-        #- hyprland-guiutils
-        #- xdg-desktop-portal-hyprland
         - noctalia
         - kitty
         - mpv
@@ -37,6 +34,7 @@ modules:
         - gnome-text-editor
         - python3-tkinter
         - firefox
+        - umbriel-nightly
     remove:
       packages:
         - rom-properties-utils
@@ -46,14 +44,16 @@ modules:
         - rom-properties-common
 
   # Terra: ativo só para o umbriel
-  - type: dnf
-    repos:
-      cleanup: true
-      files:
-        - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
-    install:
-      packages:
-        - umbriel-nightly
+  #- type: dnf
+    #repos:
+      #cleanup: true
+      #files:
+        #- https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
+    #install:
+      #packages:
+        #- umbriel-nightly
+
+
 
   #- type: script
     #snippets:
