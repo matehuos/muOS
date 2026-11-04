@@ -6,23 +6,18 @@ base-image: ghcr.io/ublue-os/bazzite-gnome
 image-version: latest
 
 modules:
-  # 1. Garante que o repo Terra nativo do Bazzite (F44 ou F45) esteja ativo para o módulo DNF
+  # 1. Remove qualquer arquivo terra.repo pré-existente (em /etc ou /usr) para evitar conflito de ID duplicado no módulo DNF
   - type: script
     snippets:
-      - |
-        set -euo pipefail
-        for repo in /etc/yum.repos.d/terra.repo /usr/share/dnf5/repos.d/terra.repo; do
-          if [ -f "$repo" ]; then
-            sed -i 's/enabled=0/enabled=1/g' "$repo"
-          fi
-        done
+      - rm -f /etc/yum.repos.d/*terra*.repo /usr/share/dnf5/repos.d/*terra*.repo /usr/etc/yum.repos.d/*terra*.repo
 
-  # 2. Único módulo DNF: consolida camadas, reduz tempo de download de metadados e limpa tudo no final
+  # 2. Instala tudo em uma única camada e deixa o próprio BlueBuild gerenciar e limpar (cleanup: true) o terra.repo
   - type: dnf
     repos:
       cleanup: true
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+        - https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
       copr:
         - lionheartp/Hyprland
         - paolino/hyprmoncfg
@@ -37,16 +32,13 @@ modules:
         - rom-properties-common
     install:
       packages:
-        # Navegadores
         - brave-origin
         - firefox
-        # Sessão / Compositor Wayland (Umbriel + Utilitários)
         - umbriel-nightly
         - hyprmoncfg
         - awww
         - wlr-randr
         - nwg-look
-        # Apps e Ferramentas
         - noctalia
         - kitty
         - mpv
@@ -58,14 +50,3 @@ modules:
         - loupe
         - gnome-text-editor
         - python3-tkinter
-
-  # 3. Trava o Terra novamente após a instalação (Boa prática no Bazzite para evitar conflitos em futuros upgrades)
-  - type: script
-    snippets:
-      - |
-        set -euo pipefail
-        for repo in /etc/yum.repos.d/terra.repo /usr/share/dnf5/repos.d/terra.repo; do
-          if [ -f "$repo" ]; then
-            sed -i 's/enabled=1/enabled=0/g' "$repo"
-          fi
-        done
