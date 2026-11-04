@@ -5,6 +5,16 @@ description: Muuuuuuuuuuuu
 base-image: ghcr.io/ublue-os/bazzite-gnome   
 image-version: latest
 modules:
+  - type: script
+    snippets:
+      - |
+        set -euo pipefail
+        f=/usr/share/dnf5/repos.d/terra.repo
+        cp -a "$f" "$f.bb-orig"
+        sed -i -E 's/^enabled[[:space:]]*=[[:space:]]*(0|false)[[:space:]]*$/enabled=1/' "$f"
+        echo "--- terra.repo depois do sed ---"
+        grep -n -E '^\[|^enabled' "$f"
+modules:
   - type: dnf
     repos:
       cleanup: true
