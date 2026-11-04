@@ -21,6 +21,7 @@ modules:
       files:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
       copr:
+        - lionheartp/Hyprland
         - monkeygold/nautilus-open-any-terminal
         - faugus/faugus-launcher
     install:
