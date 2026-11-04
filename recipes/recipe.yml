@@ -2,19 +2,22 @@
 name: muos
 description: Muuuuuuuuuuuu
 
-base-image: ghcr.io/ublue-os/bazzite-gnome   
+base-image: ghcr.io/ublue-os/bazzite-gnome
 image-version: latest
+
 modules:
+  # 1. Garante que o repo Terra nativo do Bazzite (F44 ou F45) esteja ativo para o módulo DNF
   - type: script
     snippets:
       - |
         set -euo pipefail
-        f=/usr/share/dnf5/repos.d/terra.repo
-        cp -a "$f" "$f.bb-orig"
-        sed -i -E 's/^enabled[[:space:]]*=[[:space:]]*(0|false)[[:space:]]*$/enabled=1/' "$f"
-        echo "--- terra.repo depois do sed ---"
-        grep -n -E '^\[|^enabled' "$f"
-modules:
+        for repo in /etc/yum.repos.d/terra.repo /usr/share/dnf5/repos.d/terra.repo; do
+          if [ -f "$repo" ]; then
+            sed -i 's/enabled=0/enabled=1/g' "$repo"
+          fi
+        done
+
+  # 2. Único módulo DNF: consolida camadas, reduz tempo de download de metadados e limpa tudo no final
   - type: dnf
     repos:
       cleanup: true
@@ -25,29 +28,6 @@ modules:
         - paolino/hyprmoncfg
         - monkeygold/nautilus-open-any-terminal
         - faugus/faugus-launcher
-    install:
-      packages:
-        - brave-origin
-        - hyprland
-        - hyprland-guiutils
-        - xdg-desktop-portal-hyprland
-        - noctalia
-        - kitty
-        - mpv
-        - gnome-tweaks
-        - cockpit
-        - nautilus-open-any-terminal
-        - hyprmoncfg
-        - faugus-launcher
-        - android-tools
-        - awww
-        - wlr-randr
-        - nwg-look
-        - loupe
-        - gnome-text-editor
-        - python3-tkinter
-        - firefox
-        - umbriel-nightly
     remove:
       packages:
         - rom-properties-utils
@@ -55,17 +35,37 @@ modules:
         - rom-properties-localsearch3
         - rom-properties
         - rom-properties-common
+    install:
+      packages:
+        # Navegadores
+        - brave-origin
+        - firefox
+        # Sessão / Compositor Wayland (Umbriel + Utilitários)
+        - umbriel-nightly
+        - hyprmoncfg
+        - awww
+        - wlr-randr
+        - nwg-look
+        # Apps e Ferramentas
+        - noctalia
+        - kitty
+        - mpv
+        - gnome-tweaks
+        - cockpit
+        - nautilus-open-any-terminal
+        - faugus-launcher
+        - android-tools
+        - loupe
+        - gnome-text-editor
+        - python3-tkinter
 
-  #- type: script
-    #snippets:
-      #- |
-        #set -euo pipefail
-        #ANKI_VERSION=26.09.3
-        #cd /tmp
-        #curl -fsSL -o anki.tar.zst "https://github.com/ankitects/anki/releases/download/${ANKI_VERSION}/anki-${ANKI_VERSION}-linux-x86_64.tar.zst"
-        #mkdir anki-src
-        #tar --zstd -xf anki.tar.zst -C anki-src --strip-components=1
-        #cd anki-src
-        #PREFIX=/usr ./install.sh
-        #cd /
-        #rm -rf /tmp/anki-src /tmp/anki.tar.zst
+  # 3. Trava o Terra novamente após a instalação (Boa prática no Bazzite para evitar conflitos em futuros upgrades)
+  - type: script
+    snippets:
+      - |
+        set -euo pipefail
+        for repo in /etc/yum.repos.d/terra.repo /usr/share/dnf5/repos.d/terra.repo; do
+          if [ -f "$repo" ]; then
+            sed -i 's/enabled=1/enabled=0/g' "$repo"
+          fi
+        done
