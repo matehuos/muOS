@@ -26,7 +26,7 @@ image-version: latest
       packages:
         - brave-origin
         - firefox
-        - umbriel-nightly
+        - umbriel-git
         - hyprmoncfg
         - awww
         - wlr-randr
