@@ -18,9 +18,9 @@ modules:
     install:
       packages:
         - brave-origin
-        - hyprland
-        - hyprland-guiutils
-        - xdg-desktop-portal-hyprland
+        #- hyprland
+        #- hyprland-guiutils
+        #- xdg-desktop-portal-hyprland
         - noctalia
         - kitty
         - mpv
