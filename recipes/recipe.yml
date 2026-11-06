@@ -39,6 +39,7 @@ modules:
         - python3-tkinter
         - firefox
         - umbriel-git
+        - openssl3-libs.i686 #gambiarra acel
     remove:
       packages:
         - rom-properties-utils
