@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Steam (Modo TV)
+Comment=Steam Big Picture via gamescope na TV
+Exec=/usr/bin/steam-tv-session
+Type=Application
+DesktopNames=gamescope

@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+export SDL_VIDEODRIVER=x11
+export STEAM_MULTIPLE_XWAYLANDS=1
+
+exec /usr/bin/gamescope \
+  --prefer-output HDMI-A-1 \
+  -W 3840 -H 2160 -r 60 \
+  -e -f \
+  -- /usr/bin/steam -steamdeck -steamos3 -gamepadui

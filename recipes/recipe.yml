@@ -47,3 +47,12 @@ modules:
         - rom-properties-localsearch3
         - rom-properties
         - rom-properties-common
+        
+  - type: files
+    files:
+      - source: system
+        destination: /
+
+  - type: script
+    scripts:
+      - fix-permissions.sh
