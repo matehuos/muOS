@@ -13,6 +13,7 @@ modules:
       copr:
         - monkeygold/nautilus-open-any-terminal
         - faugus/faugus-launcher
+        - lionheartp/Hyprland
     install:
       packages:
         - brave-origin
