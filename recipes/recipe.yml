@@ -15,7 +15,7 @@ modules:
         - paolino/hyprmoncfg
         - monkeygold/nautilus-open-any-terminal
         - faugus/faugus-launcher
-        - c0mpile/builds
+        #- c0mpile/builds
     install:
       packages:
         - brave-origin
@@ -38,7 +38,7 @@ modules:
         - gnome-text-editor
         - python3-tkinter
         - firefox
-        - umbriel-git
+        #- umbriel-git
         - openssl3-libs.i686 #gambiarra acel
     remove:
       packages:
@@ -47,6 +47,15 @@ modules:
         - rom-properties-localsearch3
         - rom-properties
         - rom-properties-common
+
+  - type: dnf
+    repos:
+      cleanup: true
+      enable:
+        - terra
+    install:
+      packages:
+        - umbriel-nightly
         
   - type: files
     files:
