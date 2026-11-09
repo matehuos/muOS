@@ -33,7 +33,7 @@ modules:
         - python3-tkinter
         - firefox
         - openssl3-libs.i686 #gambiarra acel
-        - lutris
+        
     remove:
       packages:
         - rom-properties-utils
@@ -41,6 +41,7 @@ modules:
         - rom-properties-localsearch3
         - rom-properties
         - rom-properties-common
+        - lutris
 
   - type: dnf
     repos:
