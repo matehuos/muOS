@@ -51,6 +51,7 @@ modules:
     install:
       packages:
         - umbriel-nightly
+        - luciole-nightly
         
   - type: files
     files:
