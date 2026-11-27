@@ -12,7 +12,6 @@ modules:
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
       copr:
         - monkeygold/nautilus-open-any-terminal
-        - faugus/faugus-launcher
         - lionheartp/Hyprland
     install:
       packages:
@@ -23,7 +22,6 @@ modules:
         - gnome-tweaks
         - cockpit
         - nautilus-open-any-terminal
-        - faugus-launcher
         - android-tools
         - awww
         - wlr-randr
